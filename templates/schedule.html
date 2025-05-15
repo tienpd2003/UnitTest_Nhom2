@@ -1,0 +1,73 @@
+{% extends 'core_std.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+<script src="{% static 'js/schedule.js' %}"></script>
+{% endblock %}
+
+{% block title %}Lịch học{% endblock title %}
+
+{% block content %}
+<div>
+    <div class="head-schedule">
+        <div class="head-block">
+            <div class="title-block">
+                <span class="title-span" id="title">Lịch học</span>
+            </div>
+        </div>
+        <div class="head-block">
+            <div class="calender-picker">
+                <span class="span-mark" id="span-input">Chọn ngày </span>
+                <input type="date" id="calender1" min="2000-01-01" max="2100-12-31" />
+                <button type="button" id="today-btn" class="btn-custom-1 mx-2"><i class="fa fa-calendar mr-1" aria-hidden="true"></i>Hiện tại</button>
+                <button type="button" id="backweek-btn" class="btn-custom-1 mx-2">&#8592; Trở về</button>
+                <button type="button" id="nextweek-btn" class="btn-custom-1 mx-2">Tiếp &#8594;</button>
+                <button type="button" id="print-schedule" class="btn-custom-1 mx-2"><i class="fa fa-print mr-1" aria-hidden="true"></i>In lịch</button>
+            </div>
+
+            <div class= "toggle-btn">
+                <button type="button" id="print-schedule-exam" class="btn-custom-1 mr-5"><i class="fa fa-print mr-1" aria-hidden="true"></i>In lịch</button>
+                <button type="button" id="toggle-btn" class="btn-custom-1">Lịch thi</button>
+            </div>
+        </div>
+        <div class="head-block"></div>
+    </div>
+    <div class="body-schedule">
+        <div class="div-table" id="table-schedule">
+            <table class="table-custom" id="table-schedule">
+                <thead>
+                    <tr>
+                        <th class="period-th">Tiết học</th>
+                        <th class="p-th"><span>Thứ 2</span><br><span id="0"></span></th>
+                        <th class="p-th"><span>Thứ 3</span><br><span id="1"></span></th>
+                        <th class="p-th"><span>Thứ 4</span><br><span id="2"></span></th>
+                        <th class="p-th"><span>Thứ 5</span><br><span id="3"></span></th>
+                        <th class="p-th"><span>Thứ 6</span><br><span id="4"></span></th>
+                        <th class="p-th"><span>Thứ 7</span><br><span id="5"></span></th>
+                        <th class="p-th"><span>Chủ nhật</span><br><span id="6"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-schedule">
+                </tbody>
+            </table>
+        </div>
+        <div class="div-table" id="table-exam">
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Mã học phần</th>
+                        <th>Tên học phần</th>
+                        <th>Lớp</th>
+                        <th>Ngày thi</th>
+                        <th>Tiết bắt đầu</th>
+                        <th>Phòng</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-exam-schedule">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer-schedule"></div>
+</div>
+{% endblock content %}

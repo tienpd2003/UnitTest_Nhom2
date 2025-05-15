@@ -1,0 +1,17 @@
+{% extends 'core_std.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/module_registration.css' %}">
+{% endblock %}
+{% block title %} Đăng ký học phần {% endblock %}
+{% block content %}
+<div class="info-title">
+  <div class="title">
+    <span class="title-span">Đăng ký học phần</span>
+  </div>
+</div>
+
+<div id="invalid-registration">
+  <span>Ngoài thời gian đăng ký</span>
+</div>
+{% endblock %}

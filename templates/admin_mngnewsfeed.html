@@ -1,0 +1,69 @@
+{% extends 'core_admin.html' %}
+{% load static %}
+{% block title %}Quản lý tin tức {% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'css/admin_mngnewsfeed.css' %}">
+<script src="{% static 'js/admin_mngnewsfeed.js' %}"></script>
+{% endblock %}
+
+{% block titlepage %}QUẢN LÝ TIN TỨC{% endblock %}
+
+{% block content %}
+
+<div class="main-page">
+    <div class="search-zone">
+        <div>
+            <h5 class="search-class ml-4 mt-2">TIN TỨC</h5>
+        </div>
+        <div class="search-newsfeed">
+            <span class="span-title">Tìm tin tức</span>
+            <input id="search-newsfeed-input">
+            <button id="search-newsfeed-btn" type="button" class="search-btn-custom">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="newsfeed-list" id="newsfeed-list">
+
+        </div>
+    </div>
+
+    <div class="data-zone">
+        <div>
+            <h5 class="search-class ml-4 mt-2">TẢI LÊN TIN TỨC</h5>
+        </div>
+        <div class="input-data">
+            <div class="input-form">
+                <div class="title-input-div">
+                    <span class="span-title">Tiêu đề</span>
+                    <textarea class="input-size" id="input-title" rows="4"></textarea>
+                </div>
+                <div>
+                    <span class="span-title">Nội dung</span>
+                    <input type="file" id="input-pdf-file" class="input-size">
+                </div>
+                <div>
+                    <span class="span-title">Ẩn / hiện</span>
+                    <select id = "stt-hidden">
+                        <option value="True">Hiển thị</option>
+                        <option value="False">Ẩn</option>
+                    </select>
+                </div>
+            </div>
+            <div class="action-zone">
+                <div>
+                    <button class="action-btn btn0" id="delete-btn" disabled>Xóa tin</button>
+                </div>
+                <div>
+                    <button class="action-btn btn1" id="refresh">Làm mới</button>
+                </div>
+                <div>
+                    <button class="action-btn btn2" id="add-newsfeed">Lưu vào CSDL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,180 @@
+.info-title{
+    padding: 0 15px;
+}
+
+.title{
+    padding-left: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #afa4a4a1;
+}
+
+.title-span{
+    font-size: 21px;
+    font-weight: 700;
+    color: #5b636e;
+}
+
+
+#invalid-registration{
+    display: grid;
+    height: 40vh;
+    place-items: center;
+}
+
+#invalid-registration>span{
+    font-size: 20px;
+}
+
+
+#registration{
+    margin-top: 15px;
+    min-height:100vh;
+    margin-bottom: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#group-filter-moduleclass{
+    display: flex;
+    margin-top: 20px;
+}
+
+#group-filter-moduleclass>button{
+    margin-left: 5%;
+    font-weight: 600;
+}
+
+#search-module{
+    display: flex;
+    margin-left: auto;
+    margin-right: 10%;
+    align-items: center;
+}
+
+
+#search-module>span{
+    font-size: 15px;
+    margin-right: 5px;
+    font-weight: 600;
+}
+
+button , input, select {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+#search-btn{
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: rgb(62, 59, 231);
+    color: #f0f0f0;
+    border-color: azure;
+}
+
+::placeholder{
+    opacity: 0.5;
+}
+
+table {
+    border: 2px solid rgb(133, 130, 130);
+}
+
+th, td{
+    border:1px solid black;
+    padding: 5px 10px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+tbody{
+    background-color: white;
+}
+
+thead{
+    background-color:  #acd6e9;
+    border-bottom: 1px solid;
+}
+
+.tb-schedule{
+    border: none !important;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.tb-schedule td{
+    border-collapse: collapse;
+}
+
+.td-schedule{
+    padding: 0px !important;
+    border: none !important;
+}
+
+.cell1{
+    border-top: none;
+    border-left: none;
+    width: 100px;
+}
+
+.cell2{
+    border-top: none;
+    width: 70px;
+}
+
+.cell3{
+    border-top: none;
+    border-right: none;
+    width: 60px;
+}
+
+
+.div-btn{
+    width: 850px;
+    margin-right: 5%;
+}
+
+.btn-custom {
+  background-color: #e1ecf4;
+  border-radius: 3px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.btn-custom:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.btn-custom:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}

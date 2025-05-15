@@ -1,0 +1,109 @@
+{% extends 'core_std.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/module_registration.css' %}">
+<script src="{% static 'js/module_registration.js' %}"></script>
+{% endblock %}
+{% block title %} Đăng ký học phần {% endblock %}
+{% block content %}
+<div class="info-title">
+  <div class="title">
+    <span class="title-span">Đăng ký học phần</span>
+  </div>
+</div>
+
+<div id="registration">
+  <div id="group-filter-moduleclass">
+    <button type="button" id="btn-process" class="btn-custom">Học phần theo tiến độ</button>
+    <div id="search-module">
+      <span>Tìm kiếm</span>
+      <div>
+        <input id="search-value" placeholder="mã HP, lớp HP"></input>
+        <button id="search-btn" type="button">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <div class="d-flex justify-content-center">
+      <table "moduleclass-valid">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Mã học phần</th>
+            <th>Tên học phần</th>
+            <th>Số tín chỉ</th>
+            <th>Lớp học phần</th>
+            <th>Số lượng</th>
+            <th style="padding : 0px;">
+              <table style="border: none;">
+                <thead style="border-bottom: none">
+                  <tr> Thời gian học</tr>
+                  <tr style="font-size: 13px;">
+                    <th style="border-left: none; border-bottom: none; width: 100px">Phòng</th>
+                    <th style="border-bottom: none; width: 70px">Thứ</th>
+                    <th style="border-right: none; border-bottom: none; width: 60px; padding: 0px;">TBD</th>
+                  </tr>
+                  <thead>
+              </table>
+            </th>
+          </tr>
+        <tbody id="moduleclass">
+        </tbody>
+        </thead>
+      </table>
+    </div>
+    <div class="mt-4 d-flex justify-content-center">
+      <div id="div-btn-save" class="d-flex div-btn">
+        <button type="button" class="ml-auto btn-custom" id="save-btn">Lưu vào CSDL</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="saved" >
+    <div class="info-title">
+      <div class="title">
+        <span class="title-span">Học phần đã đăng ký</span>
+      </div>
+    </div>
+
+    <div class="mt-5 pb-5">
+      <div class="d-flex justify-content-center">
+        <table "moduleclass-valid">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Mã học phần</th>
+              <th>Tên học phần</th>
+              <th>Số tín chỉ</th>
+              <th>Lớp học phần</th>
+              <th style="padding : 0px;">
+                <table style="border: none;">
+                  <thead style="border-bottom: none">
+                    <tr> Thời gian học</tr>
+                    <tr style="font-size: 13px;">
+                      <th style="border-left: none; border-bottom: none; width: 100px">Phòng</th>
+                      <th style="border-bottom: none; width: 70px">Thứ</th>
+                      <th style="border-right: none; border-bottom: none; width: 60px; padding: 0px;">TBD</th>
+                    </tr>
+                    <thead>
+                </table>
+              </th>
+            </tr>
+          <tbody id="saved-moduleclass">
+          </tbody>
+          </thead>
+        </table>
+      </div>
+      <div class="mt-4 d-flex justify-content-center ">
+        <div id="div-btn-delete" class="d-flex div-btn">
+          <button type="button" class="ml-auto btn-custom" id="delete-btn">Xóa khỏi CSDL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

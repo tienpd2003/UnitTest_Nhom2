@@ -1,0 +1,42 @@
+{% extends 'core_std.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock head %}
+
+{% block title %}Thông tin sinh viên{% endblock title %}
+{% block content %}
+
+<div class="info-title">
+    <div class="title">
+        <span class="title-span">Thông tin sinh viên</span>
+    </div>
+</div>
+<div class="body-context"> 
+    <div class="block-context no-avatar"> 
+    <img src="{% static 'images/no-avatar.png'%}">
+    </div>
+    <div class="block-context">
+        <label><span>MSSV: </span><span class="text-content">{{stdinfo.idStd}}</span></label>
+        <label><span>Họ Tên: </span><span class="text-content">{{stdinfo.nameStd}}</span></label>
+        <label><span>Ngày sinh: </span><span class="text-content">{{datebirth}}</span></label>
+        <label><span>Giới tính: </span><span class="text-content">{{stdinfo.genderStd}}</span></label>
+        <label><span>Hộ khẩu thường trú: </span><span class="text-content">{{stdinfo.addressStd}}</span></label>
+        <label><span>CCCD: </span><span class="text-content">{{stdinfo.identityStd}}</span></label>
+        <label><span>Dân tộc: </span><span class="text-content">{{stdinfo.ethnicityStd}}</span></label>
+    </div>
+    <div class="block-context">
+        <label><span>Điện thoại: </span><span class="text-content">{{stdinfo.phoneStd}}</span></label>
+        <label><span>Email: </span><span class="text-content">{{stdinfo.emailStd}}</span></label>
+        <label><span>Khoa: </span><span class="text-content">{{stdinfo.idClass.department.faculty}}</span></label>
+        <label><span>Ngành học: </span><span class="text-content">{{stdinfo.idClass.department}}</span></label>
+        <label><span>Khóa học: </span><span class="text-content">{{stdinfo.idClass.idCourse}}</span></label>
+        <label><span>Lớp: </span><span class="text-content">{{stdinfo.idClass}}</span></label>
+        <label><span>Tình trạng: </span><span class="text-content">{% if stdinfo.stt %}
+            <p style="display: inline">Đã tốt nghiệp</p> {% else %}
+            <p style="display: inline">Chưa tốt nghiệp</p> {% endif %}</span>
+        </label>
+    </div>
+</div>
+
+{% endblock content %}

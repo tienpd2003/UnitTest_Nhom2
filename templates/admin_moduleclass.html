@@ -1,0 +1,278 @@
+{% extends 'core_admin.html' %}
+{% load static %}
+{% block title %}Quản lý về Khoa {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/admin_moduleclass.css' %}">
+<link rel="stylesheet" href="{% static 'css/popup_addmoduleclass.css' %}">
+<script src="{% static 'js/admin_moduleclass.js'%}"></script>
+<script src="{% static 'js/admin_moduleclass_add.js'%}"></script>
+{% endblock %}
+
+{% block titlepage %}QUẢN LÝ LỚP HỌC PHẦN{% endblock %}
+
+{% block content %}
+<div class="site-view">
+     <div class="search-zone">
+          <div>
+               <h5 id="search-class">LỚP</h5>
+               <div class="choose-idClass">
+                    <div class="filter-select">
+                         <span>Khoa</span>
+                         <select id="list-faculty">
+                         </select>
+                    </div>
+                    <div class="filter-select">
+                         <span>Ngành</span>
+                         <select id="list-department">
+                         </select>
+                    </div>
+                    <div class="filter-select">
+                         <span>Khóa</span>
+                         <select id="list-idCourse">
+                         </select>
+                    </div>
+                    <div class="filter-select">
+                         <span>Lớp</span>
+                         <select id="list-class">
+                         </select>
+                    </div>
+                    <div class="filter-select search-class-box">
+                         <div>
+                              <span>Tìm kiếm</span>
+                              <div>
+                                   <input id="search-value" placeholder="tìm kiếm lớp..."></input>
+                                   <button id="search-btn" type="button">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                   </button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+          <div class="search-results">
+               <div class="d-flex tb-results-class">
+                    <table class="table-class" id="list-idClass">
+                         <thead>
+                              <tr>
+                                   <th>Lớp</th>
+                                   <th>Khoa</th>
+                                   <th>Ngành</th>
+                                   <th>Khóa</th>
+                              </tr>
+                         </thead>
+                         <tbody id="table-body">
+                              <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                              </tr>
+                              <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                              </tr>
+                              <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                              </tr>
+                              <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                              </tr>
+                         </tbody>
+                    </table>
+               </div>
+          </div>
+     </div>
+
+     <div class="add-moduleclass">
+          <h5 id="title-center">HỌC PHẦN</h5>
+          <label id="manage-center">
+               <div class=" d-flex">
+                    <span class="ml-auto" id="choosen-class">LỚP:</span>
+               </div>
+               <div>
+                    <select id="list-semester">
+                         <option value="0">-- Học kỳ --</option>
+                    </select>
+               </div>
+          </label>
+          <div class="added-moduleclass" id="added-moduleclass">
+               <table class="table-choosenmodule">
+                    <thead>
+                         <tr>
+                              <th></th>
+                              <th>Mã học phần</th>
+                              <th>Tên học phần</th>
+                              <th>Tín chỉ</th>
+                              <th>Lịch học</th>
+                              <th></th>
+                              <th class="action"></th>
+                         </tr>
+                    </thead>
+                    <tbody id="choosen-module">
+                    </tbody>
+               </table>
+               <label>
+                    <button id="get-list-module">Thêm học phần</button>
+               </label>
+          </div>
+     </div>
+</div>
+
+<div>
+     <div id="popup" class="popup">
+          <div class="popup-content">
+               <div class="header-popup">
+                    <span class="close" id="closePopup">&times;</span>
+               </div>
+               <div class="body-popup">
+                    <label>
+                         <h5>Danh sách học phần</h5>
+                         <h5 id="idClass-choose-module"></h5>
+                    </label>
+                    <hr>
+                    <div id="filter-checkbox">
+                         <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                   id="flexRadioDefault1" checked>
+                              <label class="form-check-label" for="flexRadioDefault1">Tất cả</label>
+                         </div>
+                         <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                   id="flexRadioDefault2">
+                              <label class="form-check-label" for="flexRadioDefault2">Đã học</label>
+                         </div>
+                         <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                   id="flexRadioDefault3">
+                              <label class="form-check-label" for="flexRadioDefault2">Chưa học</label>
+                         </div>
+                    </div>
+                    <div class="list-module-div">
+                         <div id="list-module">
+                              <table id="list-module">
+                                   <thead>
+                                        <tr>
+                                             <th></th>
+                                             <th>Mã học phần</th>
+                                             <th>Tên học phần</th>
+                                             <th>Số tín</th>
+                                             <th>Chuyên ngành</th>
+                                             <th></th>
+                                        </tr>
+                                   </thead>
+                                   <tbody id="tbody-module">
+                                   </tbody>
+                              </table>
+                         </div>
+                         <label class="d-flex add-btn">
+                              <button type="button" id="button-add" class="ms-auto">Thêm học phần vào lớp</button>
+                         </label>
+                    </div>
+               </div>
+               <div class="footer-popup">
+               </div>
+          </div>
+     </div>
+</div>
+
+<div>
+     <div id="popup-schedule" class="popup">
+          <div class="popup-content">
+               <div class="header-popup">
+                    <span class="close" id="closePopup-schedule">&times;</span>
+               </div>
+               <div class="body-popup" id="mng-schedule">
+                    <h5>Thông tin lịch học</h5>
+                    <hr>
+                    <div id="info-class-module">
+                         <label>
+                              <span id="info-moduleclass"></span>
+                              <span id="info-module"></span>
+                         </label>
+                         <label>
+                              <span>Sĩ số</span>
+                              <input type="number" min="0" id="max-slots"></input>
+                         </label>
+                    </div>
+                    <div>
+                         <div id="table-schedule">
+                              <table class="schedule-moduleclass">
+                                   <thead>
+                                        <tr>
+                                             <th>Thứ</th>
+                                             <th>Tiết bắt đầu</th>
+                                             <th>Số tiết</th>
+                                             <th>Ngày bắt đầu</th>
+                                             <th>Ngày kết thúc</th>
+                                             <th>Phòng học</th>
+                                        </tr>
+                                   </thead>
+                                   <tbody id="tbody-schedule">
+                                   </tbody>
+                              </table>
+                              <div id="btn-saveschedule">
+                                   <button type="button" id="btn-addrowschedule" class="btn btn-success btn-xs">
+                                        <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
+                                   </button>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="body-popup" id="schedule-exam">
+                         <h5>Lịch thi</h5>
+                         <table class="finalexam-moduleclass">
+                              <thead>
+                                   <tr>
+                                        <th>Ngày thi</th>
+                                        <th>Tiết bắt đầu</th>
+                                        <th>Phòng thi</th>
+                                   </tr>
+                              </thead>
+                              <tbody id="tbody-finalexam">
+                                   <tr>
+                                        <td>
+                                             <input id="date-exam" type="date"></td>
+                                        </td>
+                                        <td id="dayofweek" style="display: none;">
+                                             <select>
+                                                  <option value="T2">T2</option>
+                                                  <option value="T3">T3</option>
+                                                  <option value="T4">T4</option>
+                                                  <option value="T5">T5</option>
+                                                  <option value="T6">T6</option>
+                                                  <option value="T7">T7</option>
+                                                  <option value="CN">CN</option>
+                                             </select>
+                                        </td>
+                                        <td id="period-start">
+                                             <select>
+                                                  <option value="1">1</option>
+                                                  <option value="4">4</option>
+                                                  <option value="7">7</option>
+                                                  <option value="10">10</option>
+                                                  <option value="13">13</option>
+                                             </select>
+                                        </td>
+                                        <td id="room-exam"></td>
+                                   </tr>
+                              </tbody>
+                         </table>
+                    </div>
+               </div>
+               <div class="footer-popup" id="btn-save">
+                    <button type="button" id="button-save-schedule">Lưu vào CSDL</button>
+               </div>
+          </div>
+     </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'core_std.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/transcript.css' %}">
+<script src="{% static 'js/transcript.js' %}"></script>
+{% endblock %}
+
+{% block title %}Kết quả học tập{% endblock title %}
+
+{% block content %}
+<div class="p-3 bg-white">
+  <div class="head-transcript">
+    <div class="head-block">
+      <div>
+        <span class="title-span">Kết quả học tập</span>
+      </div>
+    </div>
+    <div class="head-block">
+      <div class= "semester-selectbox">
+        <span class= "d-flex align-items-center">Học kỳ</span>
+        <select id="select-semester"></select>
+      </div>
+    </div>
+    <div class="head-block">
+      <div class="print-to-excel">
+        <button type="button" id="btn-print-transcript" class="action-btn btn-custom-1"><i
+            class="fa fa-table mr-2 fa-table-custom" aria-hidden="true"></i>In ra excel</button>
+      </div>
+    </div>
+  </div>
+  <div class="table-transcript">
+    <div id="list-module-std" class="div-table">
+      <table id="tb-list-module" class="table-custom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Mã học phần</th>
+            <th>Tên học phần</th>
+            <th>Lớp</th>
+            <th>Số tín chỉ</th>
+            <th>Điểm QT</th>
+            <th>Điểm KT</th>
+            <th>Điểm TK</th>
+            <th>Thang điểm 4</th>
+            <th>Điểm chữ</th>
+            <th>Đạt</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-moduleclass">
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="overall-transcript">
+  </div>
+</div>
+{% endblock content %}

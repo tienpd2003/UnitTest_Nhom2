@@ -1,0 +1,319 @@
+.search-zone{
+    display: flex;
+    border: 4px solid #b8b1b1;
+    height: 319px;
+    border-radius: 15px;
+}
+
+.div-search{
+    flex-grow: 1;
+}
+
+
+.search-class{
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.searchbox-class{
+    display: flex;
+    margin-left: 5%;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.searchbox-student{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.searchbox-module{
+    display: block;
+    margin-left: 110px;
+    height: 52px;
+}
+
+button , input, select {
+    border: 1px solid rgb(143, 142, 142);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+
+.search-btn-custom{
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: rgb(62, 59, 231);
+    color: #f0f0f0;
+    border-color: azure;
+}
+
+table {
+    border: 2px solid rgb(133, 130, 130);
+}
+
+th, td{
+    border:1px solid black;
+    padding: 5px 10px;
+    text-align: center;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+tbody{
+    background-color: white;
+}
+
+thead{
+    background-color:  #acd6e9;
+    border-bottom: 1px solid;
+}
+
+
+tbody tr:hover{
+    background-color: #519eca; 
+    cursor: pointer;
+}
+
+#list-module{
+    display: none;
+    background-color: white;
+    border: 1px solid #777777;
+    width: 206px;
+    max-height: 188px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 10;  
+    position: absolute;  
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+
+#list-module option:hover{
+    background-color: #519eca;
+}
+
+#list-module option{
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+span{
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+#search-module-input{
+    width: 206px;
+}
+
+.inputbox-module-clicked{
+    border-bottom: none!important;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    width: 206px;
+    box-shadow: 0 0px #ffffff !important;
+}
+
+#table-class{
+    z-index: 5;
+    padding-left: 20px;
+    margin-top: 20px;
+    height: 167px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 600px;
+}
+
+#table-class>table {
+    width: 100%;
+    border: 3px solid rgb(133, 130, 130);
+}
+
+#table-class td {
+    height: 32px;
+}
+
+
+#table-class table thead{
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+}
+
+
+::placeholder{
+    opacity: 0.5;
+}
+
+.clicked-row{
+    background-color: #519eca;
+    font-weight: bold;
+}
+
+
+.div-info{
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    align-items: end;
+    
+}
+#main-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 50px;
+    height: fit-content;
+}
+
+.title-span-module{
+    display: flex;
+    justify-content: center;
+}
+
+.title-span-class{
+    display: flex;
+    justify-content: center;
+    padding-right: 20px;
+}
+
+
+
+.title-span{
+    display: flex;
+    flex-direction: column;
+}
+
+#main-info span{
+    display: flex;
+    justify-content: center;
+}
+
+.data-zone{
+    margin-top: 15px;
+    border: 4px solid #b8b1b1;
+    border-radius: 15px;
+}
+
+.div-table{
+    box-sizing: border-box;
+    margin: 10px;
+    height: 367px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.table-custom{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#tbody-std td{
+    height: 32px;
+}
+
+
+#tbody-moduleclass td{
+    height: 32px;
+}
+
+
+.table-custom thead{
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+}
+
+
+
+
+.action-btn{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.main-page{
+    margin-bottom: 100px;
+}
+
+.btn-save{
+    display: flex;
+    justify-content: right;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+#commit-save-data{
+    margin-right: 30px;
+}
+
+
+.title-table{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+
+.action-area{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.show-list-std{
+    flex-grow: 1;
+}
+
+.print-to-excel{
+    display: flex;
+    flex-grow: 1;
+    justify-content: end;
+    
+}
+
+.fa-table{
+    color: rgb(11, 138, 0);
+}
+
+.excel-area{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.info-std{
+    display: flex;
+    flex-direction: column;
+    margin-top:  30px;
+    margin-left: 10px;
+}
+
+.search-student{
+    display: flex;
+}
+
+
+#list-module-std{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+
+#tb-list-std{
+    border: 4px solid rgb(133, 130, 130);
+}
+
+#tb-list-module{
+    border: 4px solid rgb(133, 130, 130);
+}
