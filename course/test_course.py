@@ -114,6 +114,15 @@ def client_with_auth(client, student):
 # Test cases
 @pytest.mark.django_db
 class TestModuleClass:
+    """
+    TC01 - test_create_moduleclass
+    - Đầu vào: Thông tin về module_class bao gồm module, lớp và học kỳ
+    - Xử lý: Tạo một module_class mới
+    - Đầu ra: 
+        + module_class được tạo thành công (có primary key)
+        + Số slot tối đa là 40
+        + Các quan hệ với Module, FacultyClasses và Semester được thiết lập đúng
+    """
     def test_create_moduleclass(self, module_class):
         assert module_class.pk is not None
         assert module_class.max_slot == 40
@@ -121,6 +130,19 @@ class TestModuleClass:
         assert isinstance(module_class.idClass, FacultyClasses)
         assert isinstance(module_class.semester, Semester)
 
+    """
+    TC02 - test_create_student_moduleclass
+    - Đầu vào: 
+        + Thông tin về module_class
+        + Thông tin sinh viên
+        + Thông tin học phí
+    - Xử lý: 
+        + Tạo học phí cho sinh viên
+        + Đăng ký sinh viên vào module_class
+    - Đầu ra:
+        + Student_ModuleClass được tạo thành công
+        + Học phí được tính toán chính xác dựa trên số tín chỉ và thang học phí
+    """
     def test_create_student_moduleclass(self, module_class, student, tuitionfee_scale):
         # Tạo học phí trước
         tuition = tuitionfee.objects.create(
@@ -149,11 +171,30 @@ class TestModuleClass:
 
 @pytest.mark.django_db
 class TestModuleRegistrationView:
+    """
+    TC03 - test_module_registration_view_in_time
+    - Đầu vào: Client đã xác thực và thời gian đăng ký
+    - Xử lý: Gửi request GET đến view đăng ký học phần
+    - Đầu ra: 
+        + Response status code 200
+        + Template 'module_registration.html' được sử dụng
+    """
     def test_module_registration_view_in_time(self, client_with_auth, registration):
         response = client_with_auth.get(reverse('module_registration'))
         assert response.status_code == 200
         assert 'module_registration.html' in [t.name for t in response.templates]
 
+    """
+    TC04 - test_get_moduleclass
+    - Đầu vào: 
+        + Client đã xác thực
+        + ID sinh viên
+        + Học kỳ hiện tại
+    - Xử lý: Gửi request GET để lấy danh sách module_class của sinh viên
+    - Đầu ra: 
+        + Response status code 200
+        + Trả về JSON chứa danh sách module_class
+    """
     def test_get_moduleclass(self, client_with_auth, module_class, student, semester):
         from course.views import global_semester
         global global_semester
@@ -166,6 +207,22 @@ class TestModuleRegistrationView:
         data = json.loads(response.content)
         assert len(data['moduleclasses']) == 1
 
+    """
+    TC05 - test_save_moduleclass_success
+    - Đầu vào:
+        + Client đã xác thực
+        + ID sinh viên
+        + Danh sách module_class cần đăng ký
+        + Thông tin học phí
+    - Xử lý:
+        + Gửi request POST để lưu đăng ký học phần
+        + Tính toán và cập nhật học phí
+    - Đầu ra:
+        + Response status code 200
+        + Đăng ký thành công (success: true)
+        + Dữ liệu được lưu vào database
+        + Học phí được tính toán chính xác
+    """
     def test_save_moduleclass_success(self, client_with_auth, module_class, student, semester, tuitionfee_scale):
         from course.views import global_semester
         global global_semester
@@ -196,6 +253,17 @@ class TestModuleRegistrationView:
         assert tuition is not None
         assert tuition.total_tuitionfee == expected_fee
 
+    """
+    TC06 - test_search_moduleclass
+    - Đầu vào:
+        + Client đã xác thực
+        + Từ khóa tìm kiếm (mã hoặc tên học phần)
+    - Xử lý: Gửi request GET để tìm kiếm module_class
+    - Đầu ra:
+        + Response status code 200
+        + Trả về JSON chứa kết quả tìm kiếm
+        + Kết quả phù hợp với từ khóa tìm kiếm
+    """
     def test_search_moduleclass(self, client_with_auth, module_class, semester):
         from course.views import global_semester
         global global_semester
@@ -225,6 +293,18 @@ class TestModuleRegistrationView:
         data = json.loads(response.content)
         assert len(data['moduleclasses']) == 0
 
+    """
+    TC07 - test_get_detail_schedule
+    - Đầu vào:
+        + Client đã xác thực
+        + ID của module_class
+        + Thông tin lịch học
+    - Xử lý: Gửi request GET để lấy chi tiết lịch học của module_class
+    - Đầu ra:
+        + Response status code 200
+        + Trả về JSON chứa thông tin lịch học
+        + Thông tin về ngày và tiết học chính xác
+    """
     def test_get_detail_schedule(self, client_with_auth, module_class):
         # Tạo lịch học
         schedule = ScheduleModuleClass.objects.create(
@@ -242,6 +322,17 @@ class TestModuleRegistrationView:
         assert int(data['schedule'][0]['days_of_week']) == 2
         assert int(data['schedule'][0]['period_start']) == 1
 
+    """
+    TC08 - test_get_saved_moduleclass
+    - Đầu vào:
+        + Client đã xác thực
+        + ID sinh viên
+        + Thông tin module_class đã đăng ký
+    - Xử lý: Gửi request GET để lấy danh sách module_class đã đăng ký
+    - Đầu ra:
+        + Response status code 200
+        + Trả về JSON chứa danh sách module_class đã đăng ký
+    """
     def test_get_saved_moduleclass(self, client_with_auth, student, module_class, semester, tuitionfee_scale):
         from course.views import global_semester
         global global_semester
@@ -261,6 +352,18 @@ class TestModuleRegistrationView:
         assert len(data['moduleclasses']) == 1
         assert data['moduleclasses'][0]['idModule'] == module_class.module.idModule
 
+    """
+    TC09 - test_delete_moduleclass
+    - Đầu vào:
+        + Client đã xác thực
+        + ID sinh viên
+        + Danh sách module_class cần hủy
+    - Xử lý: Gửi request POST để hủy đăng ký học phần
+    - Đầu ra:
+        + Response status code 200
+        + Hủy đăng ký thành công (success: true)
+        + Dữ liệu được xóa khỏi database
+    """
     def test_delete_moduleclass(self, client_with_auth, student, module_class, semester, tuitionfee_scale):
         # Tạo đăng ký học phần
         Student_ModuleClass.objects.create(
@@ -283,6 +386,17 @@ class TestModuleRegistrationView:
             module_class=module_class
         ).exists()
 
+    """
+    TC10 - test_check_duplicate_schedule
+    - Đầu vào:
+        + Thông tin sinh viên
+        + Hai module_class có lịch học trùng nhau
+        + Thông tin học phí
+    - Xử lý:
+        + Đăng ký module_class đầu tiên
+        + Kiểm tra trùng lịch với module_class thứ hai
+    - Đầu ra: Phát hiện trùng lịch (return True)
+    """
     def test_check_duplicate_schedule(self, module_class, student, semester, tuitionfee_scale):
         # Tạo học phí trước
         total_fee = str(int(module_class.module.credits * tuitionfee_scale.scale))
