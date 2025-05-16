@@ -1,91 +1,67 @@
 import pytest
 from datetime import date
-from django.contrib.auth.hashers import make_password, check_password
 from login_admin.models import profile_admin
-from login_admin.backends import CustomAuthBackendAdmin  # giả định đã có backend này
+from login_admin.backends import CustomAuthBackendAdmin
 
+# ======= FIXTURE: Tạo admin để test =========
 @pytest.fixture
-def setup_admin_test_data(db):
-    # Tạo admin test
+def setup_admin_data(db):
+    # Gán mật khẩu raw — để signal pre_save mã hóa tự động
     admin = profile_admin.objects.create(
-        idAdmin="555",
-        nameAdmin="Nguyễn Văn Admin",
-        password=make_password("1"),
-        datebirthAdmin=date(1985, 5, 15),
+        idAdmin='admin01',
+        nameAdmin='Trần Quang Huy',
+        password='adminpass123',
+        datebirthAdmin=date(1990, 5, 15),
         genderAdmin='Nam',
-        addressAdmin='Hà Nội'
+        phoneAdmin='0905123456',
+        emailAdmin='admin@example.com',
+        addressAdmin='TP.HCM'
     )
-
-    # Monkey patch method kiểm tra mật khẩu
-    def check_custom_password(self, raw_password):
-        return check_password(raw_password, self.password)
-
-    profile_admin.check_custom_password = check_custom_password
     return admin
 
 
+# ======= TEST: Đăng nhập đúng =========
 @pytest.mark.django_db
-def test_admin_authenticate_success(setup_admin_test_data):
+def test_admin_authenticate_success(setup_admin_data):
     backend = CustomAuthBackendAdmin()
-    user = backend.authenticate(request=None, username="admin001", password="adminpass")
+    authenticated_user = backend.authenticate(request=None, username='admin01', password='adminpass123')
 
-    if user:
-        print("✅ Đăng nhập thành công:", user.nameAdmin)
-    else:
-        print("❌ Sai kết quả")
-
-    assert user is not None
-    assert user.idAdmin == "admin001"
+    assert authenticated_user is not None
+    assert authenticated_user.idAdmin == 'admin01'
 
 
+# ======= TEST: Mật khẩu sai =========
 @pytest.mark.django_db
-def test_admin_authenticate_wrong_password(setup_admin_test_data):
+def test_admin_authenticate_wrong_password(setup_admin_data):
     backend = CustomAuthBackendAdmin()
-    result = backend.authenticate(request=None, username="admin001", password="wrongpass")
-
-    if result is None:
-        print("✅ Mật khẩu sai → Không đăng nhập")
-    else:
-        print("❌ Đăng nhập sai vẫn thành công")
+    result = backend.authenticate(request=None, username='admin01', password='wrongpass')
 
     assert result is None
 
 
+# ======= TEST: Người dùng không tồn tại =========
 @pytest.mark.django_db
-def test_admin_authenticate_not_found():
+def test_admin_authenticate_user_not_found():
     backend = CustomAuthBackendAdmin()
-    result = backend.authenticate(request=None, username="notexist", password="whatever")
-
-    if result is None:
-        print("✅ Tài khoản không tồn tại")
-    else:
-        print("❌ Sai kết quả")
+    result = backend.authenticate(request=None, username='khongtontai', password='123456')
 
     assert result is None
 
 
+# ======= TEST: get_user thành công =========
 @pytest.mark.django_db
-def test_get_admin_success(setup_admin_test_data):
+def test_admin_get_user_success(setup_admin_data):
     backend = CustomAuthBackendAdmin()
-    result = backend.get_user("admin001")
-
-    if result:
-        print("✅ Tìm thấy admin:", result.nameAdmin)
-    else:
-        print("❌ Không tìm thấy admin")
+    result = backend.get_user(setup_admin_data.pk)
 
     assert result is not None
-    assert result.idAdmin == "admin001"
+    assert result.idAdmin == 'admin01'
 
 
+# ======= TEST: get_user không tồn tại =========
 @pytest.mark.django_db
-def test_get_admin_not_found():
+def test_admin_get_user_not_found():
     backend = CustomAuthBackendAdmin()
-    result = backend.get_user("unknownadmin")
-
-    if result is None:
-        print("✅ Không tồn tại admin")
-    else:
-        print("❌ Sai kết quả")
+    result = backend.get_user('nonexistent')
 
     assert result is None
