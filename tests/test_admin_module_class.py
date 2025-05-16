@@ -3,7 +3,7 @@ from datetime import date
 from login_admin.models import profile_admin
 from login_admin.backends import CustomAuthBackendAdmin
 
-# ======= FIXTURE: Tạo admin để test =========
+# ======= FIXTURE1: Tạo admin để test =========
 @pytest.fixture
 def setup_admin_data(db):
     # Gán mật khẩu raw — để signal pre_save mã hóa tự động
@@ -20,7 +20,7 @@ def setup_admin_data(db):
     return admin
 
 
-# ======= TEST: Đăng nhập đúng =========
+# ======= TESTCASE1: Đăng nhập đúng =========
 @pytest.mark.django_db
 def test_admin_authenticate_success(setup_admin_data):
     backend = CustomAuthBackendAdmin()
@@ -30,7 +30,7 @@ def test_admin_authenticate_success(setup_admin_data):
     assert authenticated_user.idAdmin == 'admin01'
 
 
-# ======= TEST: Mật khẩu sai =========
+# =======TESTCASE2: Mật khẩu sai =========
 @pytest.mark.django_db
 def test_admin_authenticate_wrong_password(setup_admin_data):
     backend = CustomAuthBackendAdmin()
@@ -39,7 +39,7 @@ def test_admin_authenticate_wrong_password(setup_admin_data):
     assert result is None
 
 
-# ======= TEST: Người dùng không tồn tại =========
+# ======= TESTCASE3: Người dùng không tồn tại =========
 @pytest.mark.django_db
 def test_admin_authenticate_user_not_found():
     backend = CustomAuthBackendAdmin()
@@ -48,7 +48,7 @@ def test_admin_authenticate_user_not_found():
     assert result is None
 
 
-# ======= TEST: get_user thành công =========
+# ======= TESTCASE4: get_user thành công =========
 @pytest.mark.django_db
 def test_admin_get_user_success(setup_admin_data):
     backend = CustomAuthBackendAdmin()
@@ -58,7 +58,7 @@ def test_admin_get_user_success(setup_admin_data):
     assert result.idAdmin == 'admin01'
 
 
-# ======= TEST: get_user không tồn tại =========
+# ======= TESTCASE5: get_user không tồn tại =========
 @pytest.mark.django_db
 def test_admin_get_user_not_found():
     backend = CustomAuthBackendAdmin()
